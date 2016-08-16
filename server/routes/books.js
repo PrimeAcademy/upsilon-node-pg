@@ -39,9 +39,9 @@ router.post('/', function (req, res) {
 
                   if (err) {
                     res.sendStatus(500);
+                  } else {
+                    res.sendStatus(201);
                   }
-
-                  res.sendStatus(201);
                 });
   });
 });
