@@ -3,12 +3,7 @@ var app = express();
 var path = require('path');
 var bodyParser = require('body-parser');
 
-
-var movies = require('./routes/movies');
-
 app.use(bodyParser.urlencoded({ extended: true }));
-
-app.use('/movies', movies);
 
 // Catchall route
 app.get('/*', function (req, res) {
