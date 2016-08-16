@@ -3,7 +3,12 @@ var app = express();
 var path = require('path');
 var bodyParser = require('body-parser');
 
+// Our routes
+var books = require('./routes/books');
+
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use('/books', books);
 
 // Catchall route
 app.get('/*', function (req, res) {

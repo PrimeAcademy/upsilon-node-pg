@@ -39,6 +39,8 @@ function postBook() {
     book[field.name] = field.value;
   });
 
+  console.log('book: ', book);
+
   $.ajax({
     type: 'POST',
     url: '/books',
