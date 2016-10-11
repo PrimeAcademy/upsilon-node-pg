@@ -1,17 +1,16 @@
 {
-  "name": "node-full-circle",
+  "name": "rho-node-pg",
   "version": "1.0.0",
   "description": "Teaching how to incorporate postgres into a Node application",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node server/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "antoinette@primeacademy.io",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.15.1",
-    "express": "^4.13.4",
-    "pg": "^4.5.5"
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "pg": "^6.1.0"
   }
 }
