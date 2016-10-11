@@ -1,4 +1,4 @@
-# Node to Postgres Lecture
+# Node & Postgres Lecture
 
 ## Takeaways
 
