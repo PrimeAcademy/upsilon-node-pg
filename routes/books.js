@@ -25,7 +25,7 @@ router.get("/", function(req, res) {
       // 1. sql string - the actual SQL query we want to running
       // 2. callback - function to run after the database gives us our result
       //               takes an error object and the result object as it's args
-      client.query("SELECT * FROM books;", function(err, result) {
+      client.query("SELECT * FROM books ORDER BY title;", function(err, result) {
         done();
         if (err) {
           console.log("Error querying DB", err);
@@ -58,7 +58,7 @@ router.post("/", function(req, res) {
       //               takes an error object and the result object as it's args
       client.query(
         "INSERT INTO books (title, author, publication_date) VALUES ($1, $2, $3) RETURNING *;",
-        [ req.body.title, req.body.author, req.body.publication_date ],
+        [ req.body.title, req.body.author, req.body.published ],
         function(err, result) {
           done();
           if (err) {
