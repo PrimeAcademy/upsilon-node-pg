@@ -7,7 +7,7 @@ $(function(){
   // listen for a submit event on the form
   $('#book-form').on('submit', addBook);
   $('#book-list').on('click', '.save', updateBook);
-
+  $('#book-list').on('click', '.delete', deleteBook);
 });
 
 function getBooks() {
@@ -38,9 +38,13 @@ function displayBooks(books) {
 
     $form.append('<input type="date" name="published" value="' + date + '"/>');
 
-    var $button = $('<button class="save">Save!</button>');
-    $button.data('id', book.id);
-    $form.append($button);
+    var $saveButton = $('<button class="save">Save!</button>');
+    $saveButton.data('id', book.id);
+    $form.append($saveButton);
+
+    var $deleteButton = $('<button class="delete">Delete!</button>');
+    $deleteButton.data('id', book.id);
+    $form.append($deleteButton);
 
     $li.append($form);
     $('#book-list').append($li);
@@ -76,5 +80,16 @@ function updateBook(event) {
     type: 'PUT',
     data: data,
     success: getBooks
-  })
+  });
+}
+
+function deleteBook(event) {
+  event.preventDefault();
+
+  // $(this) refers to the button that was clicked
+  $.ajax({
+    url: '/books/' + $(this).data('id'),
+    type: 'DELETE',
+    success: getBooks
+  });
 }
