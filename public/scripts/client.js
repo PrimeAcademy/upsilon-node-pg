@@ -6,6 +6,8 @@ $(function(){
 
   // listen for a submit event on the form
   $('#book-form').on('submit', addBook);
+  $('#book-list').on('click', '.save', updateBook);
+
 });
 
 function getBooks() {
@@ -24,12 +26,23 @@ function displayBooks(books) {
   books.forEach(function(book){
     var $li = $('<li></li>');
 
-    $li.append('<p><strong>' + book.title + '</strong></p>');
-    $li.append('<p><em>' + book.author + '</em></p>');
+    var $form = $('<form></form>');
 
-    var date = new Date(book.publication_date).toDateString();
-    $li.append('<p><time>' + date + '</time></p>');
+    // <input type="text" name="title" value="Infinite Jest" />
+    $form.append('<input type="text" name="title" value="' + book.title + '"/>');
+    $form.append('<input type="text" name="author" value="' + book.author + '"/>');
 
+    // ISO format: yyyy-mm-ddThh-mm-ssZ
+    // desired format:  yyyy-mm-dd
+    var date = new Date(book.publication_date).toISOString().slice(0,10);
+
+    $form.append('<input type="date" name="published" value="' + date + '"/>');
+
+    var $button = $('<button class="save">Save!</button>');
+    $button.data('id', book.id);
+    $form.append($button);
+
+    $li.append($form);
     $('#book-list').append($li);
   });
 }
@@ -48,5 +61,20 @@ function addBook(event) {
     data: formData,
     success: getBooks
   });
+}
 
+function updateBook(event) {
+  event.preventDefault();
+
+  var $button = $(this);
+  var $form = $button.closest('form');
+
+  var data = $form.serialize();
+
+  $.ajax({
+    url: '/books/' + $button.data('id'),
+    type: 'PUT',
+    data: data,
+    success: getBooks
+  })
 }
