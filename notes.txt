@@ -15,3 +15,5 @@ TODO
   - AJAX call for getting books
   - AJAX call for creating books
   - some way to display books
+
+  - some way to edit and delete books
